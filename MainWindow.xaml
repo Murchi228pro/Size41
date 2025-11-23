@@ -1,0 +1,19 @@
+﻿<Window x:Class="_41Size.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_41Size"
+        mc:Ignorable="d"
+        Title="41 Размер" Height="450" Width="800"
+        FontFamily="Comic Sans MS" FontSize="12" Icon="/Content/icon.ico">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Image Source="/Content/logo.png" Width="100" Height="100" HorizontalAlignment="Left" Grid.Row="0"></Image>
+        <TextBlock Text="41 Размер" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0"></TextBlock>
+        <Frame Name="WindowFrame" Grid.Row="1"></Frame>
+    </Grid>
+</Window>
