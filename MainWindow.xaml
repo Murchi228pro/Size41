@@ -5,15 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_41Size"
         mc:Ignorable="d"
-        Title="41 Размер" Height="450" Width="800"
+        Title="41 Размер" Height="600" Width="1000"
         FontFamily="Comic Sans MS" FontSize="12" Icon="/Content/icon.ico">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="80"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <Image Source="/Content/logo.png" Width="100" Height="100" HorizontalAlignment="Left" Grid.Row="0"></Image>
-        <TextBlock Text="41 Размер" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0"></TextBlock>
-        <Frame Name="WindowFrame" Grid.Row="1"></Frame>
+        <Image Source="/Content/logo.png" Width="100" Height="80" HorizontalAlignment="Left" Grid.Row="0"></Image>
+        <TextBlock Text="41 Размер" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0"></TextBlock>
+        <Frame Name="WindowFrame" Grid.Row="1" NavigationUIVisibility="Hidden"></Frame>
     </Grid>
 </Window>

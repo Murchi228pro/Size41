@@ -22,7 +22,7 @@ namespace _41Size
         {
             InitializeComponent();
             Manager.MainFrame = WindowFrame;
-            Manager.Navigate(new ProductPage());
+            Manager.Navigate(new AuthPage());
         }
     }
 }
