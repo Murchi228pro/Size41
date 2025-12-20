@@ -18,7 +18,7 @@
         </Grid.ColumnDefinitions>
         <StackPanel VerticalAlignment="Top">
             <StackPanel.Resources>
-                <Style x:Key="CartButtonStyle" TargetType="Button">
+                <Style x:Key="CartButtonStyle" TargetType="Button" BasedOn="{StaticResource ResourceKey=ButtonBase}">
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding InOrderProductCount}" Value="0">
                             <Setter Property="Visibility" Value="Hidden"></Setter>

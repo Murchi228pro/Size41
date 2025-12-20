@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:_41Size"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <Style TargetType="Button">
+        <Style TargetType="Button" x:Key="ButtonBase">
             <Setter Property="Background" Value="#FFCE6600"></Setter>
             <Setter Property="MinHeight" Value="30"></Setter>
             <Setter Property="MinWidth" Value="70"></Setter>

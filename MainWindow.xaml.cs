@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Diagnostics;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -21,6 +22,7 @@ namespace _41Size
         public MainWindow()
         {
             InitializeComponent();
+
             Manager.MainFrame = WindowFrame;
             Manager.Navigate(new AuthPage());
         }

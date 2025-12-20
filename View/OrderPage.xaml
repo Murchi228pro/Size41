@@ -9,7 +9,7 @@
       Title="OrderPage">
 
     <Page.Resources>
-        <Style x:Key="AuthRequired" TargetType="Button">
+        <Style x:Key="AuthRequired" TargetType="Button" BasedOn="{StaticResource ResourceKey=ButtonBase}">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding IsAuthorized}" Value="False">
                     <Setter Property="IsEnabled" Value="False"></Setter>
@@ -21,7 +21,7 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
-        <Style x:Key="ClientFullName" TargetType="TextBox">
+        <Style x:Key="ClientFullName" TargetType="TextBox" >
             <Style.Triggers>
                 <DataTrigger Binding="{Binding IsAuthorized}" Value="True">
                     <Setter Property="IsReadOnly" Value="True"></Setter>
@@ -96,6 +96,9 @@
                         <TextBlock Grid.Row="0" Grid.Column="2" Text="*Скидка" FontSize="20" HorizontalAlignment="Center"></TextBlock>
                         <TextBlock Grid.Column="2" Grid.Row="2" Text="{Binding ProductDiscountAmount, StringFormat={}{0}%}" FontSize="25" HorizontalAlignment="Center" DataContext="{Binding Product}"/>
                         <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="5">
+                            <StackPanel.Resources>
+                                <Style TargetType="Button" BasedOn="{StaticResource ButtonBase}"></Style>
+                            </StackPanel.Resources>
                             <Button Name="MinusBtn" Content="-" Width="30" Click="ProductRemovingClick"/>
                             <TextBlock Name="QuantityTB" Width="50" FontSize="30" Text="{Binding DisplayOrderCount, Mode=TwoWay}"></TextBlock>
                             <Button Name="PlusBtn"  Content="+" Width="30" Click="ProductAddingClick"/>
@@ -117,11 +120,14 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
 
-        <Button Content="Сохранить у пользователя" FontSize="20" Height="auto" Margin="10, 0"
+        <Button Content="Заказать" FontSize="20" Height="auto" Margin="10, 0"
                 Click="SaveToUserOrder" Grid.Row="6" Grid.Column="0" Style="{StaticResource AuthRequired}">
         </Button>
         
         <StackPanel Grid.Column="1" Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Center">
+            <StackPanel.Resources>
+                <Style TargetType="Button" BasedOn="{StaticResource ButtonBase}"></Style>
+            </StackPanel.Resources>
             <Button Content="Сохранить" FontSize="20" Height="auto" Width="120" Margin="10, 0" Click="SaveButtonClick"></Button>
             <Button Grid.Column="1" Grid.Row="6" Content="Отменить" FontSize="20" Height="auto" Width="120" Click="CancelButtonClick"></Button>
             <Button Content="Очистить" FontSize="20" Height="auto" Width="120" Margin="10, 0" Click="CartClearClick"></Button>

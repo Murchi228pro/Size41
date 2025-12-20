@@ -73,7 +73,7 @@ namespace _41Size.View
 
         public List<Tuple<byte, byte>> DiscountFilterList => _discoutFilterList;
 
-        public int InOrderProductCount => Manager.CurrentSession.CurrentOrder.OrderProducts.Count();
+        public int InOrderProductCount => Manager.CurrentSession.CurrentOrder.OrderProductCount;
 
         public Product? SelectedProduct { get; set; }
 
@@ -119,7 +119,7 @@ namespace _41Size.View
                     .Where(op => op.ProductArticleNumber == SelectedProduct.ProductArticleNumber)
                     .FirstOrDefault(new OrderProduct
                     {
-                        Order = Manager.CurrentSession.CurrentOrder,
+                        OrderNavigation = Manager.CurrentSession.CurrentOrder,
                         ProductArticleNumber = SelectedProduct.ProductArticleNumber,
                         ProductArticleNumberNavigation = SelectedProduct,
                         OrderCount = 0

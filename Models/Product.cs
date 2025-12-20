@@ -32,4 +32,7 @@ public partial class Product
     public virtual string ProductPhotoPath => $"/Content/ProductImages/{ProductPhoto}"; 
 
     public virtual ICollection<OrderProduct> OrderProducts { get; set; } = new List<OrderProduct>();
+
+    [NotMapped]
+    public virtual decimal ProductPrice => ProductCost - ProductCost * (decimal)ProductDiscountAmount / 100;
 }

@@ -27,7 +27,7 @@ public partial class OrderProduct : INotifyPropertyChanged
         }
     }
 
-    public virtual Order Order { get; set; } = null!;
+    public virtual Order OrderNavigation { get; set; } = null!;
 
     [NotMapped]
     public virtual Product Product => ProductArticleNumberNavigation;

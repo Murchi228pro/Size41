@@ -38,7 +38,16 @@ namespace _41Size.Tools
                 DestroySession();
             }
             CurrentSession = new Session(user);
-            Navigate(new ProductPage());
+            switch(user.UserRoleNavigation.RoleName.ToLower())
+            {
+                case "клиент":
+                    Navigate(new ProductPage());
+                    break;
+                case "администратор":
+                case "менеджер":
+                    Navigate(new AdminPage());
+                    break;
+            }
         }
 
         public static void CreateVisitorSession()

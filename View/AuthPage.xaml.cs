@@ -61,6 +61,20 @@ namespace _41Size.View
             }
         }
 
+        private string _captchaField;
+
+        public string CaptchaField
+        {
+            get => _captchaField;
+            set
+            {
+                _captchaField = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CaptchaField)));
+            }
+        }
+
+        private Captcha _captcha;
+
 
         private string _passwordField;
 
@@ -70,29 +84,40 @@ namespace _41Size.View
         {
             InitializeComponent();
             this.DataContext = this;
+            UpdateCaptcha();
         }
 
         public void TryLogin(object? sender, EventArgs e)
         {
-            try
+            if (_captcha.IsCaptchaValid(CaptchaField))
             {
-                User user = GetUser();
-                LogInfo = Yarullin41Context.Instance.Roles.Where(r => r.RoleId == user.UserRole).First().RoleName;
-                Manager.CreateSession(user);
+                try
+                {
+                    User user = GetUser();
+                    LogInfo = Yarullin41Context.Instance.Roles.Where(r => r.RoleId == user.UserRole).First().RoleName;
+                    Manager.CreateSession(user);
+                    return;
+                }
+                catch (ArgumentNullException ex)
+                {
+                    LogInfo = ex.Message;
+                }
+                catch (InvalidOperationException ex)
+                {
+                    LogInfo = ex.Message;
+                }
+                catch (Exception ex)
+                {
+                    LogInfo = ex.Message;
+                    MessageBox.Show("Unhandled error!", ex.Message, MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                
             }
-            catch (ArgumentNullException ex)
+            else
             {
-                LogInfo = ex.Message;
+                LogInfo = "Неверная капча!";
             }
-            catch (InvalidOperationException ex)
-            {
-                LogInfo = ex.Message;
-            }
-            catch (Exception ex) 
-            {
-                LogInfo = ex.Message;
-                MessageBox.Show("Unhandled error!", ex.Message, MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            UpdateCaptcha();
         }
 
         public void LoginAsVisitor(object? sender, EventArgs e)
@@ -119,6 +144,12 @@ namespace _41Size.View
                 return user;
             }
             throw new InvalidOperationException("Password is incorrect!");
+        }
+
+        public void UpdateCaptcha()
+        {
+            _captcha = new Captcha();
+            _captcha.Create(CaptchaImage);
         }
     }
 }

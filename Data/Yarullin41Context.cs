@@ -67,6 +67,8 @@ public partial class Yarullin41Context : DbContext
                 .HasForeignKey(d => d.OrderUserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Order_User");
+
+            
         });
 
         modelBuilder.Entity<OrderProduct>(entity =>
@@ -78,7 +80,7 @@ public partial class Yarullin41Context : DbContext
             entity.Property(e => e.OrderId).HasColumnName("OrderID");
             entity.Property(e => e.ProductArticleNumber).HasMaxLength(100);
 
-            entity.HasOne(d => d.Order).WithMany(p => p.OrderProducts)
+            entity.HasOne(d => d.OrderNavigation).WithMany(p => p.OrderProducts)
                 .HasForeignKey(d => d.OrderId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_OrderProduct_Order");

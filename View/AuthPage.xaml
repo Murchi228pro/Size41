@@ -16,7 +16,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
-            <RowDefinition Height="300"></RowDefinition>
+            <RowDefinition Height="350"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="1" Grid.Column="1">
@@ -29,7 +29,10 @@
             <Border Background="Black" Margin="20, 2">
                 <TextBox Margin="3, 3" Height="25" Background="White" Text="{Binding PasswordField, Mode=OneWayToSource}" ></TextBox>
             </Border>
-            <Button Content="Подтвердить" Margin="35, 35, 35, 0" Click="TryLogin">
+            <Image Width="200" Height="40" Margin="15" Name="CaptchaImage">
+            </Image>
+            <TextBox Width="150" Text="{Binding CaptchaField}"></TextBox>
+            <Button Content="Подтвердить" Margin="35, 15, 35, 0" Click="TryLogin">
             </Button>
             <TextBlock Text="Войти как гость" TextAlignment="Center" Foreground="CadetBlue" MouseUp="LoginAsVisitor"></TextBlock>
             <TextBlock Margin="10" Height="36" Text="{Binding LogInfo, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" Foreground="Red"></TextBlock>

@@ -55,10 +55,10 @@ namespace _41Size.Tools
                 throw new Exception("User is incorrect!");
             }
             CurrentUser = user;
-            Order? userOrder = Yarullin41Context.Instance.Orders.Where(o => o.UserIdNavigation == user).FirstOrDefault();
+            Order? userOrder = new();
             if (userOrder != null)
             {
-                CurrentOrder.OrderProducts = Yarullin41Context.Instance.OrderProducts.Where(o => o.OrderId == userOrder.OrderId).ToList();
+                CurrentOrder.OrderProducts = new List<OrderProduct>();
                 CurrentOrder = userOrder;
             }
             else
