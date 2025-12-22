@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -45,7 +46,8 @@ namespace _41Size.Tools
 
         public Session()
         {
-            
+            CurrentOrder = new Order { };
+            CurrentOrder.OrderProducts = new ObservableCollection<OrderProduct>();
         }
 
         public Session(User user) 
@@ -55,16 +57,8 @@ namespace _41Size.Tools
                 throw new Exception("User is incorrect!");
             }
             CurrentUser = user;
-            Order? userOrder = new();
-            if (userOrder != null)
-            {
-                CurrentOrder.OrderProducts = new List<OrderProduct>();
-                CurrentOrder = userOrder;
-            }
-            else
-            {
-                CurrentOrder = new Order();
-            }
+            CurrentOrder = new Order { };
+            CurrentOrder.OrderProducts = new ObservableCollection<OrderProduct>();
         }
 
         public void Dispose()

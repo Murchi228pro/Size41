@@ -141,13 +141,12 @@ namespace _41Size.View
                 order.OrderDate = DateOnly.FromDateTime(OrderDate.Value);
                 order.OrderDeliveryDate = DateOnly.FromDateTime(OrderDeliveryDate);
                 order.OrderPickupPoint = SelectedPickupPoint.PointId;
-                order.OrderGetCode = Yarullin41Context.Instance.Orders.OrderBy(o => o.OrderGetCode).Last().OrderGetCode + 1;
-                order.OrderClientName = IsAuthorized ? ClientFullNameWritable : ClientUserName;
+                var lastOrder = Yarullin41Context.Instance.Orders.OrderBy(o => o.OrderGetCode).LastOrDefault();
+                order.OrderGetCode = lastOrder != null ? lastOrder.OrderGetCode + 1 : 1;
+                order.OrderClientName = IsAuthorized ? ClientUserName : ClientFullNameWritable;
                 order.OrderStatus = "Новый";
-                if (!Yarullin41Context.Instance.Orders.Contains(order))
-                {
-                    Yarullin41Context.Instance.Orders.Add(order);
-                }
+                var entry = Yarullin41Context.Instance.Orders.Add(order);
+                Yarullin41Context.Instance.SaveChanges();
                 foreach (var orderProduct in SelectedProducts)
                 {
                     if (!Yarullin41Context.Instance.OrderProducts.Contains(orderProduct))
@@ -156,6 +155,11 @@ namespace _41Size.View
                     }
                 }
                 Yarullin41Context.Instance.SaveChanges();
+                MessageBox.Show($"Заказ сделан успешно. Ваш код: {entry.Entity.OrderGetCode}", "Успех", MessageBoxButton.OK);
+
+                Manager.CurrentSession.CurrentOrder = new Order();
+                Manager.CurrentSession.CurrentOrder.OrderProducts = new ObservableCollection<OrderProduct>();
+                Manager.ReturnBack();
             }
             catch (Exception ex)
             {

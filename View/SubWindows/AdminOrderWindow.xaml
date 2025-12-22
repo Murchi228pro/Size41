@@ -57,6 +57,7 @@
             <DatePicker SelectedDate="{Binding EditableOrder.OrderDeliveryDateDisplay}"></DatePicker>
             <TextBlock Text="{Binding OrderSum, StringFormat='Общая сумма: 0.00'}" Height="20" Margin="4"></TextBlock>
             <TextBlock Text="{Binding OrderDiscountSum, StringFormat='Общая скидка: 0.00'}" Height="20" Margin="4"></TextBlock>
+            <TextBlock Text="{Binding OrderSumWithDiscount, StringFormat='Итог: 0.00'}" Height="20" Margin="4"></TextBlock>
         </StackPanel>
         <WrapPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200">
             <WrapPanel.Resources>

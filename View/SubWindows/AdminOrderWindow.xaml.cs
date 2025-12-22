@@ -39,6 +39,20 @@ namespace _41Size.View.SubWindows
                 if (OrderItems.IsNullOrEmpty()) return sum;
                 foreach (OrderProduct orderProduct in OrderItems)
                 {
+                    sum += (decimal)orderProduct.OrderCount * orderProduct.Product.ProductCost;
+                }
+                return sum;
+            }
+        }
+
+        public virtual decimal OrderSumWithDiscount
+        {
+            get
+            {
+                decimal sum = 0;
+                if (OrderItems.IsNullOrEmpty()) return sum;
+                foreach (OrderProduct orderProduct in OrderItems)
+                {
                     sum += (decimal)orderProduct.OrderCount * orderProduct.Product.ProductPrice;
                 }
                 return sum;
@@ -80,6 +94,7 @@ namespace _41Size.View.SubWindows
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
+            EditableOrder.OrderProducts = OrderItems;
             Yarullin41Context.Instance.SaveChanges();
             Close();
         }
@@ -94,13 +109,14 @@ namespace _41Size.View.SubWindows
             var item = (ContentControl)sender;
             OrderProduct orderElement = (OrderProduct)item.DataContext;
             OrderItems.Remove(orderElement);
-            Yarullin41Context.Instance.OrderProducts.Remove(orderElement);
         }
 
         public void OnItemsUpdate(object sender, EventArgs e)
         {
             PropertyChanged?.Invoke(this, new(nameof(OrderSum)));
             PropertyChanged?.Invoke(this, new(nameof(OrderDiscountSum)));
+            PropertyChanged?.Invoke(this, new(nameof(OrderSumWithDiscount)));
+
         }
     }
 }

@@ -73,7 +73,7 @@ namespace _41Size.View
 
         public List<Tuple<byte, byte>> DiscountFilterList => _discoutFilterList;
 
-        public int InOrderProductCount => Manager.CurrentSession.CurrentOrder.OrderProductCount;
+        public int InOrderProductCount => Manager.CurrentSession.CurrentOrder.OrderProducts.Count();
 
         public Product? SelectedProduct { get; set; }
 
@@ -113,6 +113,8 @@ namespace _41Size.View
         public void AddToOrderClick(object? sender, RoutedEventArgs e)
         {
             if (SelectedProduct == null) return;
+
+            if (Manager.CurrentSession.CurrentOrder == null) return;
             var currentOrderProduct = Manager.CurrentSession
                     .CurrentOrder
                     .OrderProducts

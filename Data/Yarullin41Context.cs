@@ -82,12 +82,12 @@ public partial class Yarullin41Context : DbContext
 
             entity.HasOne(d => d.OrderNavigation).WithMany(p => p.OrderProducts)
                 .HasForeignKey(d => d.OrderId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_OrderProduct_Order");
 
             entity.HasOne(d => d.ProductArticleNumberNavigation).WithMany(p => p.OrderProducts)
                 .HasForeignKey(d => d.ProductArticleNumber)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_OrderProduct_Product");
         });
 

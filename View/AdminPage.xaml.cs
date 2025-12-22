@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using _41Size.Data;
 using _41Size.Models;
+using _41Size.Tools;
 
 namespace _41Size.View
 {
@@ -35,6 +36,17 @@ namespace _41Size.View
 
         public Order? SelectedOrder { get; set; }
 
+        public User Admin { get
+            {
+                var user = Manager.CurrentSession.CurrentUser;
+                string roleName = user.UserRoleNavigation.RoleName.ToLower();
+                if (roleName == "администратор" || roleName == "менеджер")
+                {
+                    return user;
+                }
+                throw new Exception("Пользователь не имеет соответсвующих прав!");
+            }
+        }
 
         public IEnumerable<Order> Orders {
             get => Yarullin41Context.Instance.Orders.
@@ -60,7 +72,11 @@ namespace _41Size.View
                 IsSubWindowOpened = true;
                 Window subWindow = new SubWindows.AdminOrderWindow(SelectedOrder);
                 subWindow.Show();
-                subWindow.Closed += (o, e) => IsSubWindowOpened = false;
+                subWindow.Closed += (o, e) =>
+                {
+                    IsSubWindowOpened = false;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Orders)));
+                };
             }
             
         }
@@ -81,12 +97,16 @@ namespace _41Size.View
                 }
                 Yarullin41Context.Instance.SaveChanges();
 
-
-                Yarullin41Context.Instance.Orders.Remove(SelectedOrder);
+                if (SelectedOrder != null)
+                {
+                    Yarullin41Context.Instance.Orders.Remove(SelectedOrder);
+                }
 
                 Yarullin41Context.Instance.SaveChanges();
 
                 SelectedOrder = null;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Orders)));
+
             }
         }
     }

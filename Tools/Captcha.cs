@@ -47,7 +47,7 @@ namespace _41Size.Tools
         };
 
         private static readonly FontFamily[] randFontFamilies = {
-            new FontFamily("Arial"), new FontFamily("Papyrus"), new FontFamily("Comic Sans")
+            new FontFamily("Arial"), new FontFamily("Papyrus"), new FontFamily("Papyrus")
         };
 
         private static readonly int lineWidth = 2;
@@ -159,8 +159,8 @@ namespace _41Size.Tools
                         text.SetFontSize(Random.Shared.Next(20, 30), symbolIndex, 1);
                         break;
                     case 2:
-                        text.SetFontStyle(FontStyles.Oblique, symbolIndex, 1);
                         text.SetFontStretch(FontStretch.FromOpenTypeStretch(Random.Shared.Next(5, 9)));
+                        text.SetFontWeight(FontWeight.FromOpenTypeWeight(Random.Shared.Next(50, 100)), symbolIndex, 1);
                         break;
                     case 3:
                         text.SetFontStretch(FontStretch.FromOpenTypeStretch(Random.Shared.Next(5, 9)));

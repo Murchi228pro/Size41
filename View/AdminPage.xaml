@@ -23,14 +23,29 @@
     </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Content="Редактировать" Grid.Row ="0" Grid.Column="4" HorizontalAlignment="Right" Style="{DynamicResource OnSubWindowOpen}" Click="EditWindowOpen_Click" Width="100"></Button>
-            <Button Content="Удалить" Grid.Row ="1" Grid.Column="4" HorizontalAlignment="Right" Style="{DynamicResource OnSubWindowOpen}" Click="RemoveOrder_Click" Width="100"></Button>
-        </StackPanel>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <StackPanel Margin="5">
+                <TextBlock Text="{Binding Admin.UserFullName}"></TextBlock>
+                <TextBlock Text="{Binding Admin.UserRoleNavigation.RoleName}"></TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1" Grid.RowSpan="2">
+                
+            </StackPanel>
+        </Grid>
         <ListView ItemsSource="{Binding Orders}" Grid.Row="1" SelectedValue="{Binding SelectedOrder}">
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <Button Content="Редактировать" Grid.Row ="0" Grid.Column="4" HorizontalAlignment="Right" Style="{DynamicResource OnSubWindowOpen}" Click="EditWindowOpen_Click" Width="100"></Button>
+                    <Button Content="Удалить" Grid.Row ="1" Grid.Column="4" HorizontalAlignment="Right" Style="{DynamicResource OnSubWindowOpen}" Click="RemoveOrder_Click" Width="100"></Button>
+                </ContextMenu>
+            </ListView.ContextMenu>
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid Height="50">
